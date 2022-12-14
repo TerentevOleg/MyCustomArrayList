@@ -7,7 +7,7 @@ class MyCustomArrayListTest {
     private MyCustomArrayList<Object> testList;
     @BeforeEach
     public void setUp(){
-        testList = new MyCustomArrayList<>();
+        testList = new MyCustomArrayList<>(15);
     }
 
     @Test
@@ -29,11 +29,14 @@ class MyCustomArrayListTest {
     }
 
     @Test
-    void givenAddToListWithInvalidIndex_whenAdd_thenGetException() {
-        int index = 24;
+    void givenAddToListWithIncreaseMoreThanOne_whenAdd_thenListHasIncreaseMoreThanOne() {
+        testList.add(0, "aaa");
+        testList.add(1, "bbb");
+        testList.add(2,"ccc");
+        testList.add(25, "ooo");
 
-        assertThrows(ArrayIndexOutOfBoundsException.class,
-                () -> testList.add(index, "aaa"));
+        assertEquals(26, testList.size());
+        assertEquals("ooo", testList.get(25));
     }
 
     @Test

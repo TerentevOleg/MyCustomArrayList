@@ -16,6 +16,11 @@ public class MyCustomArrayList<T> {
         size = 0;
     }
 
+    public MyCustomArrayList(int i) {
+        array = new Object[i];
+        size = 0;
+    }
+
     /**
      * Appends the specified element to the end of this list.
      * @param t - element to be appended to this list.
@@ -35,10 +40,11 @@ public class MyCustomArrayList<T> {
      * @throws IndexOutOfBoundsException – if the index is out of range (index < 0 || index >= size()).
      */
     public void add(int index, T element) {
-        for (int i = size; i > index; i--) {
-            array[i] = array[i - 1];
+        if (index < array.length) {
+            array[index] = element;
         }
-        size += 1;
+        array = Arrays.copyOf(array, array.length + index);
+        size = index + 1;
         array[index] = element;
     }
 
